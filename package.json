@@ -20,6 +20,10 @@
     },
     "homepage": "https://github.com/githubk3/electron#readme",
     "devDependencies": {
-        "electron": "^25.5.0"
+        "electron": "^25.5.0",
+        "electron-reload": "^2.0.0-alpha.1"
+    },
+    "dependencies": {
+        "bulma": "^0.9.4"
     }
 }

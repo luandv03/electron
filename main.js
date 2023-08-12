@@ -1,8 +1,18 @@
 // main.js
 
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+const electronReload = require("electron-reload");
 const path = require("path");
+
+async function handleFileOpen() {
+    const { canceled, filePaths } = await dialog.showOpenDialog({
+        properties: ["openDirectory"],
+    });
+    if (!canceled) {
+        return filePaths[0];
+    }
+}
 
 const createWindow = () => {
     // Create the browser window.
@@ -10,6 +20,8 @@ const createWindow = () => {
         width: 800,
         height: 600,
         webPreferences: {
+            // nodeIntegration: true,
+            // contextIsolation: false,
             preload: path.join(__dirname, "preload.js"),
         },
     });
@@ -18,13 +30,15 @@ const createWindow = () => {
     mainWindow.loadFile("index.html");
 
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+    ipcMain.handle("dialog:openFile", handleFileOpen);
+
     createWindow();
 
     app.on("activate", () => {
@@ -32,6 +46,11 @@ app.whenReady().then(() => {
         // dock icon is clicked and there are no other windows open.
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
     });
+});
+
+require("electron-reload")(__dirname, {
+    electron: path.join(__dirname, "node_modules", ".bin", "electron"),
+    hardResetMethod: "exit",
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
