@@ -1,0 +1,25 @@
+{
+    "name": "electron",
+    "version": "1.0.0",
+    "description": "This is project to learn electron framework.",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/githubk3/electron.git"
+    },
+    "keywords": [
+        "electron"
+    ],
+    "author": "Luan Dinh",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/githubk3/electron/issues"
+    },
+    "homepage": "https://github.com/githubk3/electron#readme",
+    "devDependencies": {
+        "electron": "^25.5.0"
+    }
+}
