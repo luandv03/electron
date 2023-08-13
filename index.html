@@ -60,7 +60,7 @@
                 <!-- select folder -->
                 <div class="is-flex">
                     <input
-                        class="column input mr-4"
+                        class="column input mr-4 is-four-fifths"
                         id="folder__input"
                         type="text"
                         value="C://download"
@@ -79,7 +79,8 @@
             </div>
         </div>
 
-        <div class="container is-fullhd mt-6">
+        <!-- download single video layout -->
+        <!-- <div class="container is-fullhd mt-6" id="box__content__single-video">
             <div class="block columns is-justify-content-center">
                 <input
                     class="column input is-one-third"
@@ -108,10 +109,25 @@
                     </p>
 
                     <div>
-                        <ul>
-                            <li>Tác giả: John Doe</li>
-                            <li>View: 2.1M</li>
-                            <li>Size: 2.3MB</li>
+                        <ul class="is-flex">
+                            <li>
+                                <span>
+                                    <i class="fa-solid fa-user"></i>
+                                </span>
+                                John Doe
+                            </li>
+                            <li class="ml-2">
+                                <span>
+                                    <i class="fa-solid fa-eye"></i>
+                                </span>
+                                2.1M
+                            </li>
+                            <li class="ml-2">
+                                <span>
+                                    <i class="fa-solid fa-database"></i>
+                                </span>
+                                2.3MB
+                            </li>
                         </ul>
                     </div>
 
@@ -122,7 +138,7 @@
                             </span>
                             <span>Download</span>
                         </button>
-                        <!-- 
+                        
                         <button class="button is-primary">
                             <span class="icon-text">
                                 <span class="icon">
@@ -130,11 +146,118 @@
                                 </span>
                                 <span>Success</span>
                             </span>
-                        </button> -->
+                        </button>
                     </div>
                 </div>
             </div>
+        </div> -->
+
+        <!-- download multi video by username -->
+        <div
+            class="container is-fullhd mt-6 p-4"
+            id="box__content__multi-video"
+        >
+            <div class="block columns is-justify-content-center">
+                <input
+                    class="column input is-one-third"
+                    type="text"
+                    placeholder="@username"
+                />
+                <button class="button is-primary ml-2">Get</button>
+            </div>
+
+            <div class="is-flex is-fullhd is-justify-content-space-between">
+                <div>
+                    <div class="dropdown is-active">
+                        <div class="dropdown-trigger">
+                            <button
+                                class="button"
+                                aria-haspopup="true"
+                                aria-controls="dropdown-menu2"
+                            >
+                                <span>Filter</span>
+                                <span class="icon is-small">
+                                    <i
+                                        class="fas fa-angle-down"
+                                        aria-hidden="true"
+                                    ></i>
+                                </span>
+                            </button>
+                        </div>
+
+                        <!-- <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+                                <div class="dropdown-content">
+                                    <div class="dropdown-item">
+                                        <p>0 - 100K views</p>
+                                    </div>
+                                    <hr class="dropdown-divider" />
+                                    <div class="dropdown-item">
+                                        <p>100k - 500k views</p>
+                                    </div>
+                                    <hr class="dropdown-divider" />
+                                    <div class="dropdown-item">
+                                        <p>> 500k views</p>
+                                    </div>
+                                </div>
+                            </div> -->
+                    </div>
+                </div>
+
+                <div>
+                    <button class="button is-primary ml-2">
+                        <span class="icon">
+                            <i class="fas fa-download"></i>
+                        </span>
+                        <span>Download</span>
+                    </button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Description</th>
+                        <th>Link</th>
+                        <th>View</th>
+                        <th>Size</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <th>1</th>
+                        <td>
+                            <span>
+                                Kobe vs whole Bulls squad 😳 #nba #basketball
+                                #fyp #foryou #foryoupage
+                            </span>
+                        </td>
+                        <td>
+                            <!-- <a
+                                href="https://www.tiktok.com/@gdfactoryclips/video/7266481858370653458?is_from_webapp=1&sender_device=pc"
+                            > -->
+                                https://www.tiktok.com/@gdfactoryclips/video/7266481858370653458?is_from_webapp=1&sender_device=pc</a
+                            <!-- > -->
+                        </td>
+
+                        <td>2.1M</td>
+                        <td>2.3MB</td>
+                        <td>
+                            <button class="button is-primary ml-2">
+                                <span class="icon">
+                                    <i class="fas fa-download"></i>
+                                </span>
+                                <span>Download</span>
+                            </button>
+                        </td>
+                    </tr>
+
+                  
+                </tbody>
+            </table>
         </div>
+
         <script src="./renderer.js"></script>
     </body>
 </html>
