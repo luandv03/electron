@@ -51,3 +51,108 @@ listOptionItem.forEach((dropItem) => {
         }
     };
 });
+
+// handle enter input link and fetch infor video
+const btnInfoSendLink = document.querySelector(".btn__info--send");
+
+let dataSingleVideo;
+btnInfoSendLink.onclick = async function () {
+    const inputValue =
+        boxContentSingleVideoElement.querySelector("input").value;
+
+    if (!inputValue) {
+        console.log("Invalid value");
+    } else {
+        this.classList.add("is-loading");
+        const res = await window.test.handleGetDataSingleLink(inputValue);
+        dataSingleVideo = res.data;
+        this.classList.remove("is-loading");
+
+        if (res.statusCode === 200) {
+            const videoInfoElement = `<div >
+            <h3>
+                Mô tả:
+                <span>
+                    ${res.data.desc}
+                </span>
+            </h3>
+
+            <div>
+                <ul class="is-flex">
+                    <li>
+                        <span>
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        John Doe
+                    </li>
+                    <li class="ml-2">
+                        <span>
+                            <i class="fa-solid fa-eye"></i>
+                        </span>
+                        ${res.data.view}
+                    </li>
+                    <li class="ml-2">
+                        <span>
+                            <i class="fa-solid fa-database"></i>
+                        </span>
+                        2.3MB
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mt-2">
+                <button class="button is-primary ml-2 btn--download">
+                    <span class="icon">
+                        <i class="fas fa-download"></i>
+                    </span>
+                    <span>Download</span>
+                </button>
+
+                <button
+                    class="button is-primary is-hidden btn--success"
+                >
+                    <span class="icon-text">
+                        <span class="icon">
+                            <i class="fas fa-check-square"></i>
+                        </span>
+                        <span>Success</span>
+                    </span>
+                </button>
+            </div>
+        </div>`;
+
+            boxContentSingleVideoElement.querySelector(
+                ".single__video-info"
+            ).innerHTML = videoInfoElement;
+
+            // download video
+            const btnDownloadSingleVideo =
+                boxContentSingleVideoElement.querySelector(
+                    ".single__video-info .btn--download"
+                );
+
+            btnDownloadSingleVideo.onclick = async function () {
+                this.classList.add("is-loading");
+
+                const res = await window.test.handleDownloadVideoByUrl({
+                    data: dataSingleVideo,
+                    folder: filePathElement.value,
+                });
+
+                if (res.statusCode === 200) {
+                    this.classList.add("is-hidden");
+                    this.classList.remove("is-loading");
+                    boxContentSingleVideoElement
+                        .querySelector(".single__video-info .btn--success")
+                        .classList.remove("is-hidden");
+                } else {
+                    this.classList.remove("is-loading");
+                }
+            };
+        } else {
+            boxContentSingleVideoElement.querySelector(
+                ".single__video-info"
+            ).innerHTML = `<div>${res.message}</div>`;
+        }
+    }
+};

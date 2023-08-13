@@ -15,6 +15,19 @@ async function handleFileOpen() {
     }
 }
 
+async function handleGetDataSingleLink(event, url) {
+    const data = await tiktokService.getDataVideoByUrl(url);
+
+    return data;
+}
+
+async function handleDownloadVideoByUrl(event, payload) {
+    const { data, folder } = payload;
+    const res = await tiktokService.downloadVideoByUrl(data, folder);
+
+    return res;
+}
+
 const createWindow = () => {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
@@ -39,6 +52,8 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
     ipcMain.handle("dialog:openFile", handleFileOpen);
+    ipcMain.handle("video:send-link", handleGetDataSingleLink);
+    ipcMain.handle("video:download_by_url", handleDownloadVideoByUrl);
 
     createWindow();
 

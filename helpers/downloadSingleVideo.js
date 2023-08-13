@@ -5,6 +5,8 @@ const downloadSingleVideo = async (item, folder) => {
     return new Promise((resolve, reject) => {
         const fileName = `${item.id}-${item.desc}.mp4`;
         const downloadFile = getDataVideo(item.url);
+        folder = folder + "\\";
+        console.log(folder);
         const file = fs.createWriteStream(folder + fileName);
         downloadFile
             .then((res) => {
