@@ -28,6 +28,12 @@ async function handleDownloadVideoByUrl(event, payload) {
     return res;
 }
 
+async function handleGetListDataByUsername(event, username) {
+    const res = await tiktokService.getListDataVideoByUserName(username);
+
+    return res;
+}
+
 const createWindow = () => {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
@@ -54,6 +60,7 @@ app.whenReady().then(() => {
     ipcMain.handle("dialog:openFile", handleFileOpen);
     ipcMain.handle("video:send-link", handleGetDataSingleLink);
     ipcMain.handle("video:download_by_url", handleDownloadVideoByUrl);
+    ipcMain.handle("video:send_username", handleGetListDataByUsername);
 
     createWindow();
 

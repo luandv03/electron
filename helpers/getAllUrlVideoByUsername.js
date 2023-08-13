@@ -28,7 +28,7 @@ const getAllUrlVideoByUsername = async (username) => {
     try {
         let previousHeight;
         let scrollAttempts = 0;
-        const maxScrollAttempts = 2; // Giới hạn số lần cuộn trang
+        const maxScrollAttempts = 3; // Giới hạn số lần cuộn trang
 
         let videoList = [];
 
@@ -83,4 +83,4 @@ const getAllUrlVideoByUsername = async (username) => {
     }
 };
 
-module.export = getAllUrlVideoByUsername;
+module.exports = getAllUrlVideoByUsername;

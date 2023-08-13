@@ -20,5 +20,7 @@ contextBridge.exposeInMainWorld("test", {
         ipcRenderer.invoke("video:send-link", url),
     handleDownloadVideoByUrl: (payload) =>
         ipcRenderer.invoke("video:download_by_url", payload),
+    handleGetListDataByUsername: (username) =>
+        ipcRenderer.invoke("video:send_username", username),
     // we can also expose variables, not just functions
 });

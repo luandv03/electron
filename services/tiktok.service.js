@@ -49,8 +49,8 @@ class TiktokService {
             console.log(
                 `[*] Fetching video ${i + 1} of ${listUrlVideo.length}`
             );
-            console.log(`[*] URL: ${listVideo[i]}`);
-            listVideo.push(getVideoNoWM(listVideo[i]));
+            console.log(`[*] URL: ${listUrlVideo[i]}`);
+            listVideo.push(getVideoNoWM(listUrlVideo[i]));
         }
 
         return Promise.allSettled(listVideo)

@@ -10,7 +10,7 @@ selectFolderBtn.addEventListener("click", async () => {
 const singleVideoElement = document.getElementById(
     "box__content__single-video"
 );
-const multiVideoElement = document.getElementById("box__content__multie-video");
+const multiVideoElement = document.getElementById("box__content__multi-video");
 
 // handle select dropdown menu
 const dropdownElement = document.querySelector(".dropdown ");
@@ -31,23 +31,15 @@ const listOptionItem = document.querySelectorAll(
     ".option__dropdown-menu .dropdown-item"
 );
 
-const boxContentSingleVideoElement = document.getElementById(
-    "box__content__single-video"
-);
-
-const boxContentMultiVideoElement = document.getElementById(
-    "box__content__multi-video"
-);
-
 listOptionItem.forEach((dropItem) => {
     dropItem.onclick = function () {
         if (this.classList.contains("select__single-video")) {
-            boxContentSingleVideoElement.classList.remove("is-hidden");
-            boxContentMultiVideoElement.classList.add("is-hidden");
+            singleVideoElement.classList.remove("is-hidden");
+            multiVideoElement.classList.add("is-hidden");
         }
         if (this.classList.contains("select__multi-video")) {
-            boxContentSingleVideoElement.classList.add("is-hidden");
-            boxContentMultiVideoElement.classList.remove("is-hidden");
+            singleVideoElement.classList.add("is-hidden");
+            multiVideoElement.classList.remove("is-hidden");
         }
     };
 });
@@ -57,8 +49,7 @@ const btnInfoSendLink = document.querySelector(".btn__info--send");
 
 let dataSingleVideo;
 btnInfoSendLink.onclick = async function () {
-    const inputValue =
-        boxContentSingleVideoElement.querySelector("input").value;
+    const inputValue = singleVideoElement.querySelector("input").value;
 
     if (!inputValue) {
         console.log("Invalid value");
@@ -121,15 +112,13 @@ btnInfoSendLink.onclick = async function () {
             </div>
         </div>`;
 
-            boxContentSingleVideoElement.querySelector(
-                ".single__video-info"
-            ).innerHTML = videoInfoElement;
+            singleVideoElement.querySelector(".single__video-info").innerHTML =
+                videoInfoElement;
 
             // download video
-            const btnDownloadSingleVideo =
-                boxContentSingleVideoElement.querySelector(
-                    ".single__video-info .btn--download"
-                );
+            const btnDownloadSingleVideo = singleVideoElement.querySelector(
+                ".single__video-info .btn--download"
+            );
 
             btnDownloadSingleVideo.onclick = async function () {
                 this.classList.add("is-loading");
@@ -142,7 +131,7 @@ btnInfoSendLink.onclick = async function () {
                 if (res.statusCode === 200) {
                     this.classList.add("is-hidden");
                     this.classList.remove("is-loading");
-                    boxContentSingleVideoElement
+                    singleVideoElement
                         .querySelector(".single__video-info .btn--success")
                         .classList.remove("is-hidden");
                 } else {
@@ -150,9 +139,85 @@ btnInfoSendLink.onclick = async function () {
                 }
             };
         } else {
-            boxContentSingleVideoElement.querySelector(
+            singleVideoElement.querySelector(
                 ".single__video-info"
             ).innerHTML = `<div>${res.message}</div>`;
+        }
+    }
+};
+
+// handle multi video
+const btnUsernameSend = multiVideoElement.querySelector(".btn__username--send");
+
+btnUsernameSend.onclick = async function () {
+    const inputValue = multiVideoElement.querySelector("input").value;
+
+    if (!inputValue) {
+        console.log("Invalid input");
+    } else {
+        this.classList.add("is-loading");
+        const res = await window.test.handleGetListDataByUsername(inputValue);
+        this.classList.remove("is-loading");
+
+        if (res.statusCode === 200) {
+            const listItemElement =
+                res.totalGoodData > 0 &&
+                res.goodData
+                    .map(
+                        (item, index) => `<tr>
+            <th>${index}</th>
+            <td>
+                <span>
+                    ${item.desc}
+                </span>
+            </td>
+            <td>
+                <a
+                    href="https://www.tiktok.com/@gdfactoryclips/video/7266481858370653458?is_from_webapp=1&sender_device=pc"
+                >
+                </a>
+            </td>
+
+            <td>${item.view}</td>
+            <td>2.3MB</td>
+            <td>
+                <button class="button is-primary ml-2">
+                    <span class="icon">
+                        <i class="fas fa-download"></i>
+                    </span>
+                    <span>Download</span>
+                </button>
+            </td>
+        </tr>`
+                    )
+                    .join("");
+
+            const tableElement = `<table class="table">
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Description</th>
+                        <th>Link</th>
+                        <th>View</th>
+                        <th>Size</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                        ${listItemElement}
+                </tbody>
+            </table>`;
+
+            multiVideoElement.querySelector(".list__data").innerHTML =
+                tableElement;
+
+            multiVideoElement
+                .querySelector(".btn--download__list")
+                .removeAttribute("disabled");
+        } else {
+            const errorElement = `<p>${res.message}</p>`;
+            multiVideoElement.appendChild(errorElement);
         }
     }
 };
