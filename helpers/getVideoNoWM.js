@@ -1,6 +1,6 @@
 const { Headers } = require("node-fetch");
 
-const getIdVideo = require("./getIdVideo.helper");
+const getIdVideo = require("./getIdVideo.js");
 
 //adding useragent to avoid ip bans
 const headers = new Headers();

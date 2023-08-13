@@ -4,6 +4,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const electronReload = require("electron-reload");
 const path = require("path");
+const tiktokService = require("./services/tiktok.service");
 
 async function handleFileOpen() {
     const { canceled, filePaths } = await dialog.showOpenDialog({

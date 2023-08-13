@@ -1,7 +1,7 @@
-const getVideoNoWM = require("../../helper/getVideoNoWM.js");
-const downloadSingleVideo = require("../../helper/downloadSingleVideo.js");
-const getAllUrlVideoByUsername = require("../../helper/getAllUrlVideoByUsername.js");
-const downloadMediaFromList = require("../../helper/downloadMediaFromList.js");
+const getVideoNoWM = require("../helpers/getVideoNoWM.js");
+const downloadSingleVideo = require("../helpers/downloadSingleVideo.js");
+const getAllUrlVideoByUsername = require("../helpers/getAllUrlVideoByUsername.js");
+const downloadMediaFromList = require("../helpers/downloadMediaFromList.js");
 
 class TiktokService {
     async getDataVideoByUrl(url) {

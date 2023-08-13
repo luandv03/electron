@@ -1,4 +1,4 @@
-const downloadSingleVideo = require("./downloadSingleVideo.helper.js");
+const downloadSingleVideo = require("./downloadSingleVideo.js");
 
 // ##### download many video concurrent
 const downloadMediaFromList = async (list, concurrencyLimit, folder) => {
