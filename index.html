@@ -9,6 +9,8 @@
         /> -->
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Tiktok Toolkit</title>
+        <link rel="stylesheet" href="./styles.css" />
+
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
@@ -24,10 +26,10 @@
     <body>
         <div class="container is-fullhd">
             <div
-                class="is-flex notification is-fullhd is-primary is-justify-content-space-between"
+                class="is-flex notification is-fullhd is-primary is-justify-content-space-between is-radiusless"
             >
                 <!-- select options -->
-                <div class="dropdown is-active">
+                <div class="dropdown">
                     <div class="dropdown-trigger">
                         <button
                             class="button"
@@ -44,17 +46,27 @@
                         </button>
                     </div>
 
-                    <!-- <div class="dropdown-menu" id="dropdown-menu2" role="menu">
-                        <div class="dropdown-content">
-                            <div class="dropdown-item">
-                                <p>Tải bằng URL video</p>
-                            </div>
-                            <hr class="dropdown-divider" />
-                            <div class="dropdown-item">
-                                <p>Tải bằng @username</p>
+                    <div class="option__dropdown-menu">
+                        <div
+                            class="dropdown-menu"
+                            id="dropdown-menu2"
+                            role="menu"
+                        >
+                            <div class="dropdown-content">
+                                <div
+                                    class="dropdown-item select__single-video is-clickable"
+                                >
+                                    <p>Tải bằng URL video</p>
+                                </div>
+                                <hr class="dropdown-divider" />
+                                <div
+                                    class="dropdown-item select__multi-video is-clickable"
+                                >
+                                    <p>Tải bằng @username</p>
+                                </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
 
                 <!-- select folder -->
@@ -80,7 +92,7 @@
         </div>
 
         <!-- download single video layout -->
-        <!-- <div class="container is-fullhd mt-6" id="box__content__single-video">
+        <div class="container is-fullhd mt-6" id="box__content__single-video">
             <div class="block columns is-justify-content-center">
                 <input
                     class="column input is-one-third"
@@ -99,14 +111,6 @@
                             #foryou #foryoupage
                         </span>
                     </h3>
-                    <p>
-                        URL:
-                        <a
-                            href="https://www.tiktok.com/@gdfactoryclips/video/7266481858370653458?is_from_webapp=1&sender_device=pc"
-                        >
-                            https://www.tiktok.com/@gdfactoryclips/video/7266481858370653458?is_from_webapp=1&sender_device=pc</a
-                        >
-                    </p>
 
                     <div>
                         <ul class="is-flex">
@@ -138,7 +142,7 @@
                             </span>
                             <span>Download</span>
                         </button>
-                        
+
                         <button class="button is-primary">
                             <span class="icon-text">
                                 <span class="icon">
@@ -150,11 +154,11 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <!-- download multi video by username -->
         <div
-            class="container is-fullhd mt-6 p-4"
+            class="container is-fullhd mt-6 p-4 is-hidden"
             id="box__content__multi-video"
         >
             <div class="block columns is-justify-content-center">
@@ -168,7 +172,7 @@
 
             <div class="is-flex is-fullhd is-justify-content-space-between">
                 <div>
-                    <div class="dropdown is-active">
+                    <div class="dropdown">
                         <div class="dropdown-trigger">
                             <button
                                 class="button"
@@ -185,21 +189,25 @@
                             </button>
                         </div>
 
-                        <!-- <div class="dropdown-menu" id="dropdown-menu2" role="menu">
-                                <div class="dropdown-content">
-                                    <div class="dropdown-item">
-                                        <p>0 - 100K views</p>
-                                    </div>
-                                    <hr class="dropdown-divider" />
-                                    <div class="dropdown-item">
-                                        <p>100k - 500k views</p>
-                                    </div>
-                                    <hr class="dropdown-divider" />
-                                    <div class="dropdown-item">
-                                        <p>> 500k views</p>
-                                    </div>
+                        <div
+                            class="dropdown-menu"
+                            id="dropdown-menu2"
+                            role="menu"
+                        >
+                            <div class="dropdown-content">
+                                <div class="dropdown-item">
+                                    <p>0 - 100K views</p>
                                 </div>
-                            </div> -->
+                                <hr class="dropdown-divider" />
+                                <div class="dropdown-item">
+                                    <p>100k - 500k views</p>
+                                </div>
+                                <hr class="dropdown-divider" />
+                                <div class="dropdown-item">
+                                    <p>> 500k views</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -234,11 +242,10 @@
                             </span>
                         </td>
                         <td>
-                            <!-- <a
+                            <a
                                 href="https://www.tiktok.com/@gdfactoryclips/video/7266481858370653458?is_from_webapp=1&sender_device=pc"
-                            > -->
-                                https://www.tiktok.com/@gdfactoryclips/video/7266481858370653458?is_from_webapp=1&sender_device=pc</a
-                            <!-- > -->
+                            >
+                            </a>
                         </td>
 
                         <td>2.1M</td>
@@ -252,8 +259,6 @@
                             </button>
                         </td>
                     </tr>
-
-                  
                 </tbody>
             </table>
         </div>
