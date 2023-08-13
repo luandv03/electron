@@ -21,7 +21,7 @@ const downloadMediaFromList = async (list, concurrencyLimit, folder) => {
             downloadPromises.push(downloadPromise);
         }
 
-        return await Promise.all(downloadPromises)
+        return Promise.all(downloadPromises)
             .then(() => {
                 return {
                     statusCode: 200,
