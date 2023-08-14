@@ -13,19 +13,21 @@ const singleVideoElement = document.getElementById(
 const multiVideoElement = document.getElementById("box__content__multi-video");
 
 // handle select dropdown menu
-const dropdownElement = document.querySelector(".dropdown ");
+const dropdownElements = document.querySelectorAll(".dropdown");
 
-dropdownElement.onmouseover = function () {
-    if (!dropdownElement.classList.contains("is-active")) {
-        dropdownElement.classList.add("is-active");
-    }
-};
+dropdownElements.forEach((dropdownElement) => {
+    dropdownElement.onmouseover = function () {
+        if (!this.classList.contains("is-active")) {
+            this.classList.add("is-active");
+        }
+    };
 
-dropdownElement.onmouseout = function () {
-    if (dropdownElement.classList.contains("is-active")) {
-        dropdownElement.classList.remove("is-active");
-    }
-};
+    dropdownElement.onmouseout = function () {
+        if (this.classList.contains("is-active")) {
+            this.classList.remove("is-active");
+        }
+    };
+});
 
 const listOptionItem = document.querySelectorAll(
     ".option__dropdown-menu .dropdown-item"
