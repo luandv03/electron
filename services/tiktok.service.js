@@ -87,20 +87,7 @@ class TiktokService {
             dataList,
             limitVideoConcurrentlyDownloaded,
             folder
-        )
-            .then(() => {
-                return {
-                    statusCode: 200,
-                    message: "Download successfull",
-                };
-            })
-            .catch((error) => {
-                return {
-                    statusCode: 400,
-                    message: "Download failure",
-                    error,
-                };
-            });
+        );
     }
 }
 

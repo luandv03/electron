@@ -204,7 +204,11 @@ function updateListDataTableDOM() {
                   .join("")
             : "<p>No results</p>";
 
-    const tableElement = `<table class="table">
+    const tableElement = `
+        <div>
+            <p>Tổng số video: ${filterData.length}</p>
+        </div>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Pos</th>
@@ -239,7 +243,9 @@ function updateListDataTableDOM() {
                 }
             );
 
-            console.log(res);
+            if (res.statusCode === 200) {
+                console.log(res.message);
+            }
 
             this.classList.remove("is-loading");
         };

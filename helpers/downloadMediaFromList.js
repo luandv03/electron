@@ -39,7 +39,7 @@ const downloadMediaFromList = async (list, concurrencyLimit, folder) => {
     }; // nên việc sử dụng promise.all là hoàn toàn hợp lý
 
     // Start downloading with concurrency limit
-    return await downloadWithConcurrencyLimit();
+    return downloadWithConcurrencyLimit();
 };
 
 module.exports = downloadMediaFromList;
