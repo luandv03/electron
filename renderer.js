@@ -34,7 +34,16 @@ const listOptionItem = document.querySelectorAll(
 );
 
 listOptionItem.forEach((dropItem) => {
+    dropItem.onmouseover = function () {
+        this.style.opacity = 0.8;
+    };
+
+    dropItem.onmouseout = function () {
+        this.style.opacity = 1;
+    };
+
     dropItem.onclick = function () {
+        document.querySelector(".option__name").textContent = this.textContent;
         if (this.classList.contains("select__single-video")) {
             singleVideoElement.classList.remove("is-hidden");
             multiVideoElement.classList.add("is-hidden");
@@ -223,3 +232,21 @@ btnUsernameSend.onclick = async function () {
         }
     }
 };
+
+// list dropdown item filters
+const listFilters = multiVideoElement.querySelectorAll(".dropdown-item");
+
+listFilters.forEach((filterItem) => {
+    filterItem.onmouseover = function () {
+        this.style.opacity = 0.8;
+    };
+
+    filterItem.onmouseout = function () {
+        this.style.opacity = 1;
+    };
+
+    filterItem.onclick = function () {
+        multiVideoElement.querySelector(".filter__name").textContent =
+            this.textContent;
+    };
+});
