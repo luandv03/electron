@@ -160,6 +160,82 @@ btnInfoSendLink.onclick = async function () {
 // handle multi video
 const btnUsernameSend = multiVideoElement.querySelector(".btn__username--send");
 
+let listDataAll = [];
+let filterData = [];
+
+function updateListDataTableDOM() {
+    const filterOption =
+        multiVideoElement.querySelector(".filter__name").textContent;
+    if (filterOption.includes("All")) {
+        filterData = listDataAll;
+    } else if (filterOption.includes("0 - 100K")) {
+        filterData = listDataAll.filter((item) => item.view < 100000);
+    } else if (filterOption.includes("100K - 500K")) {
+        filterData = listDataAll.filter(
+            (item) => item.view >= 100000 && item.view <= 500000
+        );
+    } else {
+        filterData = listDataAll.filter((item) => item.view > 500000);
+    }
+
+    const listItemElement =
+        filterData.length > 0
+            ? filterData
+                  .map(
+                      (item, index) => `<tr>
+        <th>${index}</th>
+        <td>
+            <span>
+                ${item.desc}
+            </span>
+        </td>
+        <td>
+            <a
+                href="https://www.tiktok.com/@gdfactoryclips/video/7266481858370653458?is_from_webapp=1&sender_device=pc"
+            >
+            </a>
+        </td>
+
+        <td>${item.view}</td>
+        <td>2.3MB</td>
+        <td>
+            <button class="button is-primary ml-2">
+                <span class="icon">
+                    <i class="fas fa-download"></i>
+                </span>
+                <span>Download</span>
+            </button>
+        </td>
+        </tr>`
+                  )
+                  .join("")
+            : "<p>No results</p>";
+
+    const tableElement = `<table class="table">
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Description</th>
+                    <th>Link</th>
+                    <th>View</th>
+                    <th>Size</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                    ${listItemElement}
+            </tbody>
+        </table>`;
+
+    multiVideoElement.querySelector(".list__data").innerHTML = tableElement;
+
+    multiVideoElement
+        .querySelector(".btn--download__list")
+        .removeAttribute("disabled");
+}
+
+//
 btnUsernameSend.onclick = async function () {
     const inputValue = multiVideoElement.querySelector("input").value;
 
@@ -168,64 +244,12 @@ btnUsernameSend.onclick = async function () {
     } else {
         this.classList.add("is-loading");
         const res = await window.test.handleGetListDataByUsername(inputValue);
+        listDataAll = res.totalGoodData > 0 && res.goodData;
         this.classList.remove("is-loading");
 
+        updateListDataTableDOM();
+
         if (res.statusCode === 200) {
-            const listItemElement =
-                res.totalGoodData > 0 &&
-                res.goodData
-                    .map(
-                        (item, index) => `<tr>
-            <th>${index}</th>
-            <td>
-                <span>
-                    ${item.desc}
-                </span>
-            </td>
-            <td>
-                <a
-                    href="https://www.tiktok.com/@gdfactoryclips/video/7266481858370653458?is_from_webapp=1&sender_device=pc"
-                >
-                </a>
-            </td>
-
-            <td>${item.view}</td>
-            <td>2.3MB</td>
-            <td>
-                <button class="button is-primary ml-2">
-                    <span class="icon">
-                        <i class="fas fa-download"></i>
-                    </span>
-                    <span>Download</span>
-                </button>
-            </td>
-        </tr>`
-                    )
-                    .join("");
-
-            const tableElement = `<table class="table">
-                <thead>
-                    <tr>
-                        <th>Pos</th>
-                        <th>Description</th>
-                        <th>Link</th>
-                        <th>View</th>
-                        <th>Size</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                        ${listItemElement}
-                </tbody>
-            </table>`;
-
-            multiVideoElement.querySelector(".list__data").innerHTML =
-                tableElement;
-
-            multiVideoElement
-                .querySelector(".btn--download__list")
-                .removeAttribute("disabled");
         } else {
             const errorElement = `<p>${res.message}</p>`;
             multiVideoElement.appendChild(errorElement);
@@ -248,5 +272,7 @@ listFilters.forEach((filterItem) => {
     filterItem.onclick = function () {
         multiVideoElement.querySelector(".filter__name").textContent =
             this.textContent;
+
+        updateListDataTableDOM();
     };
 });
