@@ -189,13 +189,6 @@ function updateListDataTableDOM() {
                 ${item.desc}
             </span>
         </td>
-        <td>
-            <a
-                href="https://www.tiktok.com/@gdfactoryclips/video/7266481858370653458?is_from_webapp=1&sender_device=pc"
-            >
-            </a>
-        </td>
-
         <td>${item.view}</td>
         <td>2.3MB</td>
         <td>
@@ -216,7 +209,6 @@ function updateListDataTableDOM() {
                 <tr>
                     <th>Pos</th>
                     <th>Description</th>
-                    <th>Link</th>
                     <th>View</th>
                     <th>Size</th>
                     <th>Action</th>
@@ -230,9 +222,27 @@ function updateListDataTableDOM() {
 
     multiVideoElement.querySelector(".list__data").innerHTML = tableElement;
 
-    multiVideoElement
-        .querySelector(".btn--download__list")
-        .removeAttribute("disabled");
+    filterData.length > 0 &&
+        multiVideoElement
+            .querySelector(".btn--download__list")
+            .removeAttribute("disabled");
+
+    multiVideoElement.querySelector(".btn--download__list").onclick =
+        async function () {
+            this.classList.add("is-loading");
+
+            // handle download multi video
+            const res = await window.test.hanldeDownloadVideoFromListByUsername(
+                {
+                    dataList: filterData,
+                    folder: filePathElement.value,
+                }
+            );
+
+            console.log(res);
+
+            this.classList.remove("is-loading");
+        };
 }
 
 //

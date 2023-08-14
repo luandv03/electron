@@ -81,13 +81,26 @@ class TiktokService {
     }
 
     async downloadVideoFromList(dataList, folder) {
-        const limitVideoConcurrentlyDownloaded = 10;
+        const limitVideoConcurrentlyDownloaded = 5;
 
         return downloadMediaFromList(
             dataList,
             limitVideoConcurrentlyDownloaded,
             folder
-        );
+        )
+            .then(() => {
+                return {
+                    statusCode: 200,
+                    message: "Download successfull",
+                };
+            })
+            .catch((error) => {
+                return {
+                    statusCode: 400,
+                    message: "Download failure",
+                    error,
+                };
+            });
     }
 }
 

@@ -28,7 +28,7 @@ const getAllUrlVideoByUsername = async (username) => {
     try {
         let previousHeight;
         let scrollAttempts = 0;
-        const maxScrollAttempts = 5; // Giới hạn số lần cuộn trang
+        const maxScrollAttempts = 1; // Giới hạn số lần cuộn trang
 
         let videoList = [];
 
