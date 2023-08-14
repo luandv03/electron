@@ -181,26 +181,26 @@ function updateListDataTableDOM() {
     const listItemElement =
         filterData.length > 0
             ? filterData
-                  .map(
-                      (item, index) => `<tr>
-        <th>${index}</th>
-        <td>
-            <span>
-                ${item.desc}
-            </span>
-        </td>
-        <td>${item.view}</td>
-        <td>2.3MB</td>
-        <td>
-            <button class="button is-primary ml-2">
-                <span class="icon">
-                    <i class="fas fa-download"></i>
-                </span>
-                <span>Download</span>
-            </button>
-        </td>
-        </tr>`
-                  )
+                  .map((item, index) => {
+                      `<tr>
+                        <th>${index}</th>
+                        <td>
+                            <span>
+                                ${item.desc && item.desc}
+                            </span>
+                        </td>
+                        <td>${item.view}</td>
+                        <td>2.3MB</td>
+                        <td>
+                            <button class="button is-primary ml-2">
+                                <span class="icon">
+                                    <i class="fas fa-download"></i>
+                                </span>
+                                <span>Download</span>
+                            </button>
+                        </td>
+                        </tr>`;
+                  })
                   .join("")
             : "<p>No results</p>";
 
@@ -234,6 +234,7 @@ function updateListDataTableDOM() {
     multiVideoElement.querySelector(".btn--download__list").onclick =
         async function () {
             this.classList.add("is-loading");
+            this.querySelector(".text-download__list").textContent = "Cancel";
 
             // handle download multi video
             const res = await window.test.hanldeDownloadVideoFromListByUsername(
@@ -245,8 +246,11 @@ function updateListDataTableDOM() {
 
             if (res.statusCode === 200) {
                 console.log(res.message);
+            } else {
+                console.log(res.message);
             }
 
+            this.querySelector(".text-download__list").textContent = "Download";
             this.classList.remove("is-loading");
         };
 }
@@ -260,7 +264,9 @@ btnUsernameSend.onclick = async function () {
     } else {
         this.classList.add("is-loading");
         const res = await window.test.handleGetListDataByUsername(inputValue);
-        listDataAll = res.totalGoodData > 0 && res.goodData;
+        listDataAll =
+            res.totalGoodData > 0 &&
+            res.goodData.filter((item) => item !== undefined);
         this.classList.remove("is-loading");
 
         updateListDataTableDOM();

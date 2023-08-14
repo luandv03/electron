@@ -21,6 +21,8 @@ const downloadMediaFromList = async (list, concurrencyLimit, folder) => {
             downloadPromises.push(downloadPromise);
         }
 
+        console.log("Done!")
+
         return Promise.all(downloadPromises)
             .then(() => {
                 return {

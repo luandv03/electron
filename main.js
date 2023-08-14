@@ -2,7 +2,7 @@
 
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
-const electronReload = require("electron-reload");
+// const electronReload = require("electron-reload");
 const path = require("path");
 const tiktokService = require("./services/tiktok.service");
 
@@ -57,7 +57,7 @@ const createWindow = () => {
     mainWindow.loadFile("index.html");
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
@@ -82,10 +82,10 @@ app.whenReady().then(() => {
     });
 });
 
-require("electron-reload")(__dirname, {
-    electron: path.join(__dirname, "node_modules", ".bin", "electron"),
-    hardResetMethod: "exit",
-});
+// require("electron-reload")(__dirname, {
+//     electron: path.join(__dirname, "node_modules", ".bin", "electron"),
+//     hardResetMethod: "exit",
+// });
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
